@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bjishong Central School — Student Handbook 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --crimson: #b5202a;
+    --gold: #c9973a;
+    --cream: #fdf6ec;
+    --dark: #1a1208;
+    --mid: #5c4a2a;
+    --light: #e8d9bf;
+    --sidebar-w: 280px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* SIDEBAR */
+  #sidebar {
+    width: var(--sidebar-w);
+    background: var(--dark);
+    color: var(--cream);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    overflow-y: auto;
+    position: relative;
+    z-index: 10;
+    border-right: 3px solid var(--gold);
+  }
+
+  #sidebar-header {
+    padding: 28px 20px 20px;
+    border-bottom: 1px solid rgba(201,151,58,0.3);
+    background: linear-gradient(180deg, #2a1a0a 0%, var(--dark) 100%);
+  }
+
+  .school-badge {
+    width: 56px;
+    height: 56px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    font-size: 22px;
+  }
+
+  #sidebar-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.5;
+  }
+
+  #sidebar-header p {
+    font-size: 11px;
+    color: rgba(253,246,236,0.5);
+    margin-top: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-section {
+    padding: 12px 0 4px;
+    border-bottom: 1px solid rgba(201,151,58,0.15);
+  }
+
+  .nav-label {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding: 0 20px 8px;
+    opacity: 0.7;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 20px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    font-size: 12.5px;
+    color: rgba(253,246,236,0.75);
+    border-left: 3px solid transparent;
+  }
+
+  .nav-item:hover { background: rgba(201,151,58,0.1); color: var(--cream); }
+  .nav-item.active {
+    background: rgba(201,151,58,0.15);
+    color: var(--gold);
+    border-left-color: var(--gold);
+  }
+
+  .nav-icon { font-size: 14px; width: 18px; text-align: center; flex-shrink: 0; }
+
+  /* MAIN */
+  #main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  #topbar {
+    background: white;
+    border-bottom: 2px solid var(--light);
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+
+  #chapter-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    color: var(--dark);
+  }
+
+  #topbar .meta {
+    font-size: 12px;
+    color: var(--mid);
+    letter-spacing: 0.03em;
+  }
+
+  #search-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--cream);
+    border: 1px solid var(--light);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 12px;
+    color: var(--mid);
+  }
+
+  #search-box input {
+    border: none;
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--dark);
+    outline: none;
+    width: 160px;
+  }
+
+  /* CONTENT */
+  #content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 40px 48px;
+    scroll-behavior: smooth;
+  }
+
+  .page { display: none; animation: fadeIn 0.35s ease; }
+  .page.active { display: block; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+  /* COVER PAGE */
+  .cover {
+    text-align: center;
+    padding: 30px 0;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .cover-badge {
+    width: 110px;
+    height: 110px;
+    background: radial-gradient(circle, var(--gold), #8a5e1a);
+    border-radius: 50%;
+    margin: 0 auto 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 44px;
+    box-shadow: 0 8px 32px rgba(181,32,42,0.2);
+    border: 4px solid var(--light);
+  }
+
+  .cover h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: var(--crimson);
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .cover .subtitle {
+    font-size: 14px;
+    color: var(--mid);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .divider {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--crimson), var(--gold));
+    margin: 20px auto;
+    border-radius: 2px;
+  }
+
+  .cover-quote {
+    background: linear-gradient(135deg, #fff9f0 0%, var(--cream) 100%);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 20px 24px;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--mid);
+    text-align: left;
+    margin: 28px 0;
+    line-height: 1.7;
+  }
+
+  .cover-quote cite {
+    display: block;
+    font-style: normal;
+    font-size: 12px;
+    color: var(--gold);
+    margin-top: 10px;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.08em;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 28px;
+  }
+
+  .info-card {
+    background: white;
+    border: 1px solid var(--light);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: left;
+    border-top: 3px solid var(--gold);
+  }
+
+  .info-card h4 {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .info-card p {
+    font-size: 13px;
+    color: var(--dark);
+    font-weight: 500;
+  }
+
+  /* SECTION PAGES */
+  .section-hero {
+    background: linear-gradient(135deg, var(--dark) 0%, var(--mid) 100%);
+    color: var(--cream);
+    border-radius: 14px;
+    padding: 32px 36px;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-hero::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    width: 160px;
+    height: 160px;
+    background: rgba(201,151,58,0.15);
+    border-radius: 50%;
+  }
+
+  .section-hero h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    margin-bottom: 8px;
+    position: relative;
+  }
+
+  .section-hero p {
+    font-size: 13px;
+    opacity: 0.7;
+    line-height: 1.6;
+    max-width: 480px;
+    position: relative;
+  }
+
+  .section-hero .hero-icon {
+    font-size: 42px;
+    margin-bottom: 16px;
+  }
+
+  /* CARDS */
+  .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+  .card-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+
+  .card {
+    background: white;
+    border: 1px solid var(--light);
+    border-radius: 10px;
+    padding: 18px;
+    border-top: 3px solid var(--crimson);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+  .card.gold { border-top-color: var(--gold); }
+
+  .card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    margin-bottom: 8px;
+    color: var(--dark);
+  }
+
+  .card p, .card li {
+    font-size: 12.5px;
+    color: var(--mid);
+    line-height: 1.6;
+  }
+
+  .card ul { list-style: none; padding: 0; }
+  .card ul li { padding: 3px 0; padding-left: 14px; position: relative; }
+  .card ul li::before { content: '›'; position: absolute; left: 0; color: var(--gold); font-weight: bold; }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; margin-bottom: 24px; border-radius: 10px; border: 1px solid var(--light); }
+  table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  th { background: var(--dark); color: var(--gold); padding: 11px 14px; text-align: left; font-weight: 500; letter-spacing: 0.04em; font-size: 11px; text-transform: uppercase; }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--light); color: var(--dark); }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: rgba(232,217,191,0.2); }
+
+  /* SECTION HEADING */
+  .section-h {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--dark);
+    margin: 28px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--light);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* RULE ITEMS */
+  .rule-list { list-style: none; padding: 0; }
+  .rule-item {
+    display: flex;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(232,217,191,0.6);
+    align-items: flex-start;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--dark);
+  }
+
+  .rule-num {
+    background: var(--crimson);
+    color: white;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* BADGE PILLS */
+  .pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    margin: 2px;
+  }
+
+  .pill.red { background: rgba(181,32,42,0.1); color: var(--crimson); }
+  .pill.gold { background: rgba(201,151,58,0.15); color: #7a5510; }
+  .pill.dark { background: rgba(26,18,8,0.08); color: var(--mid); }
+
+  /* LEVEL CARDS */
+  .level-card {
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 14px;
+    border-left: 5px solid;
+  }
+
+  .level-card.d { border-color: #6c9e5a; background: rgba(108,158,90,0.06); }
+  .level-card.c { border-color: #d4a017; background: rgba(212,160,23,0.06); }
+  .level-card.b { border-color: #e07020; background: rgba(224,112,32,0.06); }
+  .level-card.a { border-color: var(--crimson); background: rgba(181,32,42,0.06); }
+
+  .level-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+  .level-card p { font-size: 12px; line-height: 1.6; color: var(--mid); }
+
+  /* CALENDAR */
+  .cal-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(232,217,191,0.5);
+    font-size: 12.5px;
+  }
+
+  .cal-date {
+    background: var(--crimson);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    min-width: 80px;
+    text-align: center;
+    margin-top: 2px;
+  }
+
+  .cal-date.gold-bg { background: var(--gold); }
+
+  /* STAFF GRID */
+  .staff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+  .staff-card {
+    background: white;
+    border: 1px solid var(--light);
+    border-radius: 10px;
+    padding: 14px;
+    text-align: center;
+  }
+
+  .staff-avatar {
+    width: 42px;
+    height: 42px;
+    background: linear-gradient(135deg, var(--gold), var(--crimson));
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .staff-card h4 { font-size: 12px; font-weight: 600; color: var(--dark); margin-bottom: 3px; }
+  .staff-card p { font-size: 11px; color: var(--mid); }
+  .staff-card .phone { font-size: 10.5px; color: var(--gold); margin-top: 4px; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--light); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+  /* PROGRESS BAR */
+  #progress-bar {
+    height: 3px;
+    background: linear-gradient(90deg, var(--crimson), var(--gold));
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: width 0.3s;
+    z-index: 100;
+  }
+
+  /* Mobile toggle */
+  #menu-toggle { display: none; }
+
+  @media (max-width: 700px) {
+    #sidebar { position: fixed; left: -100%; top: 0; bottom: 0; transition: left 0.3s; }
+    #sidebar.open { left: 0; }
+    #content { padding: 20px 18px; }
+    #menu-toggle { display: flex; background: none; border: none; font-size: 20px; cursor: pointer; color: var(--dark); }
+    .card-grid { grid-template-columns: 1fr; }
+    .staff-grid { grid-template-columns: 1fr 1fr; }
+    .info-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar" style="width:0%"></div>
+
+<nav id="sidebar">
+  <div id="sidebar-header">
+    <div class="school-badge">🏔</div>
+    <h1>Bjishong Central School<br>Student Handbook</h1>
+    <p>Academic Year 2026 · Gasa, Bhutan</p>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-label">Overview</div>
+    <div class="nav-item active" onclick="goTo('cover',this)">
+      <span class="nav-icon">📖</span> Cover & Welcome
+    </div>
+    <div class="nav-item" onclick="goTo('history',this)">
+      <span class="nav-icon">🏛</span> School History
+    </div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-label">Daily Life</div>
+    <div class="nav-item" onclick="goTo('schedule',this)">
+      <span class="nav-icon">🕐</span> Schedule & Timing
+    </div>
+    <div class="nav-item" onclick="goTo('fees',this)">
+      <span class="nav-icon">💰</span> Fee Structure
+    </div>
+    <div class="nav-item" onclick="goTo('curriculum',this)">
+      <span class="nav-icon">📚</span> Curriculum
+    </div>
+    <div class="nav-item" onclick="goTo('programs',this)">
+      <span class="nav-icon">⭐</span> Special Programs
+    </div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-label">Rules & Conduct</div>
+    <div class="nav-item" onclick="goTo('conduct',this)">
+      <span class="nav-icon">📋</span> Code of Conduct
+    </div>
+    <div class="nav-item" onclick="goTo('discipline',this)">
+      <span class="nav-icon">⚖️</span> Discipline Policy
+    </div>
+    <div class="nav-item" onclick="goTo('health',this)">
+      <span class="nav-icon">🏥</span> Health Protocol
+    </div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-label">People</div>
+    <div class="nav-item" onclick="goTo('staff',this)">
+      <span class="nav-icon">👩‍🏫</span> Teaching Staff
+    </div>
+    <div class="nav-item" onclick="goTo('captains',this)">
+      <span class="nav-icon">🏅</span> Office Bearers
+    </div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-label">Academics</div>
+    <div class="nav-item" onclick="goTo('calendar',this)">
+      <span class="nav-icon">📅</span> School Calendar
+    </div>
+    <div class="nav-item" onclick="goTo('exams',this)">
+      <span class="nav-icon">📝</span> Exam Weightage
+    </div>
+    <div class="nav-item" onclick="goTo('awards',this)">
+      <span class="nav-icon">🏆</span> Awards & Criteria
+    </div>
+  </div>
+</nav>
+
+<div id="main">
+  <div id="topbar">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button id="menu-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+      <span id="chapter-title" style="font-family:'Playfair Display',serif;font-size:17px;">Cover & Welcome</span>
+    </div>
+    <div class="meta">Ministry of Education and Skills Development</div>
+    <div id="search-box">
+      <span>🔍</span>
+      <input type="text" placeholder="Search handbook…" oninput="handleSearch(this.value)" id="search-input">
+    </div>
+  </div>
+
+  <div id="content">
+
+    <!-- COVER -->
+    <div class="page active" id="page-cover">
+      <div class="cover">
+        <div class="cover-badge">🏔</div>
+        <h2>Student Handbook 2026</h2>
+        <p class="subtitle">Bjishong Central School · Gasa, Bhutan</p>
+        <div class="divider"></div>
+        <div class="cover-quote">
+          "I am a firm believer that if there is one word that will stand out above all other words when we describe our country's amazing journey of modernization over the last few decades — it is Education."
+          <cite>— His Majesty the King</cite>
+        </div>
+        <div class="info-grid">
+          <div class="info-card">
+            <h4>School Motto</h4>
+            <p>"Peak of Excellence"</p>
+          </div>
+          <div class="info-card">
+            <h4>Academic Year</h4>
+            <p>Feb 16 – Dec 19, 2026</p>
+          </div>
+          <div class="info-card">
+            <h4>Contact</h4>
+            <p>+975 17441310</p>
+          </div>
+          <div class="info-card">
+            <h4>Email</h4>
+            <p style="font-size:11px;">bjishongcs@education.gov.bt</p>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="card" style="text-align:left;margin-top:20px;">
+          <h3>Ministry Vision</h3>
+          <p>An educated and enlightened society of GNH, built and sustained on the unique Bhutanese values of Tha-Dam-Tshig Ley-Ju-Drey.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- HISTORY -->
+    <div class="page" id="page-history">
+      <div class="section-hero">
+        <div class="hero-icon">🏛</div>
+        <h2>School History</h2>
+        <p>From a humble primary school in 1997 to a thriving central school today.</p>
+      </div>
+      <div class="card-grid">
+        <div class="card gold"><h3>1997</h3><p>Damji Primary School established at the old location.</p></div>
+        <div class="card gold"><h3>2007</h3><p>Upgraded to Damji Middle Secondary School (PP–IX) and relocated to a new site.</p></div>
+        <div class="card gold"><h3>2015</h3><p>Renamed Bjishong Central School.</p></div>
+        <div class="card gold"><h3>2017</h3><p>Upgraded to Higher Secondary School.</p></div>
+        <div class="card gold"><h3>2021</h3><p>Identified as a School with SEN Program and pilot school for Bhutan Baccalaureate.</p></div>
+        <div class="card gold"><h3>2022</h3><p>Transition of Bhutan Baccalaureate (BB) program completed.</p></div>
+      </div>
+      <h2 class="section-h">🎯 School Goals</h2>
+      <div class="card-grid">
+        <div class="card"><h3>Academic Competency</h3><p>Enhance academic excellence and lifelong learning.</p></div>
+        <div class="card"><h3>Community Vitality</h3><p>Strengthen the school community and its bonds.</p></div>
+        <div class="card"><h3>Supportive Environment</h3><p>Foster a safe and inclusive learning environment.</p></div>
+        <div class="card"><h3>Health & Well-being</h3><p>Promote physical health and wellness.</p></div>
+      </div>
+    </div>
+
+    <!-- SCHEDULE -->
+    <div class="page" id="page-schedule">
+      <div class="section-hero">
+        <div class="hero-icon">🕐</div>
+        <h2>Daily Schedule</h2>
+        <p>Summer and winter timings for all students, including boarders and day scholars.</p>
+      </div>
+      <h2 class="section-h">📅 Week at a Glance</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Day</th><th>Programme</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Monday</strong></td><td>Driglam Day — Morning Assembly in Kabney & Rachu</td></tr>
+            <tr><td><strong>Tuesday</strong></td><td>DEAR (Drop Everything and Read)</td></tr>
+            <tr><td><strong>Wednesday</strong></td><td>1-hour Mentoring Session</td></tr>
+            <tr><td><strong>Thursday</strong></td><td>Scout Day & Aesthetics</td></tr>
+            <tr><td><strong>Friday</strong></td><td>DEAR / Maths Practice</td></tr>
+            <tr><td><strong>Saturday</strong></td><td>Aerobics (6:15–7:15 AM) + Physical Learning Experiences (8:45–10:45 AM)</td></tr>
+            <tr><td><strong>Sunday</strong></td><td>Leisure Reading for boarders (11 AM–12:30 PM)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h2 class="section-h">☀️ Summer Key Timings (Mon/Tue/Thu/Fri)</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Time</th><th>Activity</th></tr></thead>
+          <tbody>
+            <tr><td>5:15 – 5:25 AM</td><td>Rising Bell</td></tr>
+            <tr><td>7:15 – 8:00 AM</td><td>Breakfast</td></tr>
+            <tr><td>8:50 – 3:35 PM</td><td>Academic Periods (1–8)</td></tr>
+            <tr><td>4:30 – 5:45 PM</td><td>Games & Recess</td></tr>
+            <tr><td>6:00 – 7:00 PM</td><td>Evening Study</td></tr>
+            <tr><td>7:40 – 8:40 PM</td><td>Night Study</td></tr>
+            <tr><td>9:15 PM</td><td>Lights Off</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h2 class="section-h">❄️ Winter Key Timings</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Time</th><th>Activity</th></tr></thead>
+          <tbody>
+            <tr><td>5:30 AM</td><td>Rising Bell</td></tr>
+            <tr><td>6:15 AM</td><td>Morning Prayer</td></tr>
+            <tr><td>7:45 – 8:15 AM</td><td>Breakfast</td></tr>
+            <tr><td>8:50 – 3:25 PM</td><td>Academic Periods (1–8)</td></tr>
+            <tr><td>4:00 – 4:15 PM</td><td>Evening Tea</td></tr>
+            <tr><td>4:15 – 5:15 PM</td><td>Games and Sports</td></tr>
+            <tr><td>9:30 PM</td><td>Lights Off</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- FEES -->
+    <div class="page" id="page-fees">
+      <div class="section-hero">
+        <div class="hero-icon">💰</div>
+        <h2>Annual Fee Structure</h2>
+        <p>All fees in Ngultrum (Nu.) per academic year.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Fee Type</th>
+              <th>PP–VI Boarder</th><th>PP–VI Day</th>
+              <th>VII–VIII Boarder</th><th>VII–VIII Day</th>
+              <th>IX–XII Boarder</th><th>IX–XII Day</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>SDF</td><td>30</td><td>30</td><td>100</td><td>100</td><td>200</td><td>200</td></tr>
+            <tr><td>Token Fees</td><td>—</td><td>5</td><td>—</td><td>5</td><td>—</td><td>5</td></tr>
+            <tr><td>Boarder Fees</td><td>50</td><td>—</td><td>50</td><td>—</td><td>50</td><td>—</td></tr>
+            <tr><td>Choe Tshog</td><td>35</td><td>35</td><td>35</td><td>35</td><td>35</td><td>35</td></tr>
+            <tr><td>Hostel Welfare</td><td>100</td><td>—</td><td>100</td><td>—</td><td>100</td><td>—</td></tr>
+            <tr><td>School Rimdro</td><td>200</td><td>200</td><td>200</td><td>200</td><td>200</td><td>200</td></tr>
+            <tr><td>Scout Fees</td><td>35</td><td>35</td><td>35</td><td>35</td><td>35</td><td>35</td></tr>
+            <tr><td>Student Diary</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td></tr>
+            <tr><td><strong>Grand Total</strong></td><td><strong>550</strong></td><td><strong>405</strong></td><td><strong>620</strong></td><td><strong>475</strong></td><td><strong>720</strong></td><td><strong>575</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- CURRICULUM -->
+    <div class="page" id="page-curriculum">
+      <div class="section-hero">
+        <div class="hero-icon">📚</div>
+        <h2>School Curriculum Programs</h2>
+        <p>Three integrated educational programs serving all learners.</p>
+      </div>
+      <div class="card-grid three">
+        <div class="card">
+          <h3>DCPD Program</h3>
+          <ul>
+            <li>English & Dzongkha</li><li>Mathematics</li><li>Sciences (Bio, Chem, Physics)</li>
+            <li>History & Geography</li><li>Social Studies</li><li>Economics, Business, Accountancy</li><li>ICT</li>
+          </ul>
+        </div>
+        <div class="card gold">
+          <h3>BB Program</h3>
+          <p style="margin-bottom:8px;">5 Areas of Development:</p>
+          <ul>
+            <li>Cerebral</li><li>Physical</li><li>Spiritual</li><li>Social</li><li>Emotional</li>
+          </ul>
+          <p style="margin-top:8px;font-size:11px;">7 Gifts: Sports, Songs, Dance, Stories, Patterns, Recipe, Language</p>
+        </div>
+        <div class="card">
+          <h3>SEN Program</h3>
+          <ul>
+            <li>Functional Curriculum</li>
+            <li>Pre-Vocational Classes</li>
+            <li>Mainstream Curriculum (DCPD)</li>
+          </ul>
+        </div>
+      </div>
+      <h2 class="section-h">9 Attributes of School Excellence</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;">
+        <span class="pill gold">Joy</span><span class="pill gold">Risk Taking</span><span class="pill gold">Mastery</span>
+        <span class="pill gold">Leadership</span><span class="pill gold">Individualism</span><span class="pill gold">Sense of Purpose</span>
+        <span class="pill gold">Learners as Teachers</span><span class="pill gold">Teachers as Learners</span><span class="pill gold">Community Engagement</span>
+      </div>
+    </div>
+
+    <!-- PROGRAMS -->
+    <div class="page" id="page-programs">
+      <div class="section-hero">
+        <div class="hero-icon">⭐</div>
+        <h2>Special Programs</h2>
+        <p>Holistic development through Mentorship, Reading, Driglam and Scouting.</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <h3>🤝 Mentorship Program</h3>
+          <p>Builds honest, trust-based relationships between students (mentees) and teachers (mentors). Focuses on individualized care to actualize innate potential across all 5 Areas of Development.</p>
+        </div>
+        <div class="card">
+          <h3>📖 DEAR Program</h3>
+          <p>Drop Everything And Read — conducted twice weekly. Aims to improve reading culture, communication skills, and English/Dzongkha literacy. Includes an intensive Reading Week in September.</p>
+        </div>
+        <div class="card gold">
+          <h3>🏕 Scouting Program</h3>
+          <p>Part of the world's largest educational youth movement (54M+ members, 216 countries). Supports wholesome development through outdoor, experiential learning and values-based activities.</p>
+        </div>
+        <div class="card gold">
+          <h3>🇧🇹 Driglam Namzha</h3>
+          <p>Every Monday, students practice Driglam — Bhutan's code of etiquette and cultural identity — to preserve and promote the nation's unique traditions across generations.</p>
+        </div>
+      </div>
+      <h2 class="section-h">Scout Mottos & Promises</h2>
+      <div class="card-grid three">
+        <div class="card"><h3>Nazhoen Scouts</h3><p><strong>Motto:</strong> "Be Prepared"</p><p style="margin-top:6px;">Promise: Duty to Koen Chhog Sum, Tsa Wa Sum, self, parents and others.</p></div>
+        <div class="card"><h3>Nachung Scouts</h3><p><strong>Motto:</strong> "Do Your Best"</p><p style="margin-top:6px;">Promise: Duty to God, King, country, people and a good turn every day.</p></div>
+        <div class="card"><h3>Cheychey Scouts</h3><p><strong>Motto:</strong> "Sharing"</p><p style="margin-top:6px;">Promise: Duty to God, Self and Others.</p></div>
+      </div>
+    </div>
+
+    <!-- CONDUCT -->
+    <div class="page" id="page-conduct">
+      <div class="section-hero">
+        <div class="hero-icon">📋</div>
+        <h2>Student Code of Conduct</h2>
+        <p>All students are expected to uphold these standards at all times.</p>
+      </div>
+      <ul class="rule-list">
+        <li class="rule-item"><span class="rule-num">1</span>Must be in national dress in all public places.</li>
+        <li class="rule-item"><span class="rule-num">2</span>Should not write or scribble on textbooks or library books.</li>
+        <li class="rule-item"><span class="rule-num">3</span>Not allowed to drive within school premises.</li>
+        <li class="rule-item"><span class="rule-num">4</span>Must wear facemask during required circumstances.</li>
+        <li class="rule-item"><span class="rule-num">5</span>Senior students should be role models and caring to juniors.</li>
+        <li class="rule-item"><span class="rule-num">6</span>Must follow school timing strictly; arrive at venues at least 5 minutes early.</li>
+        <li class="rule-item"><span class="rule-num">7</span>Must wear full school uniform during school hours and activities.</li>
+        <li class="rule-item"><span class="rule-num">8</span>Must attend all school activities: assembly, classes, games, SUPW, prayers, studies.</li>
+        <li class="rule-item"><span class="rule-num">9</span>Must show respect to teachers, support staff and elders at all times.</li>
+        <li class="rule-item"><span class="rule-num">10</span>Must take care of school furniture, fittings and property. Damage = full cost liability.</li>
+        <li class="rule-item"><span class="rule-num">12</span><strong>Strictly prohibited:</strong> smoking, chewing tobacco/doma, consuming alcohol, drugs and gambling.</li>
+        <li class="rule-item"><span class="rule-num">13</span>Dangerous items (chains, knives, knuckles, etc.) are prohibited.</li>
+        <li class="rule-item"><span class="rule-num">19</span>Must speak only Dzongkha or English while in school.</li>
+        <li class="rule-item"><span class="rule-num">20</span>Minimum 90% attendance required; failing = withdrawal from examinations.</li>
+        <li class="rule-item"><span class="rule-num">26</span>Mobile phones, music sets and electronic gadgets not allowed (subject to confiscation).</li>
+        <li class="rule-item"><span class="rule-num">29</span>Tattooing is strictly prohibited. Penalty applies for both erasable and permanent tattoos.</li>
+      </ul>
+    </div>
+
+    <!-- DISCIPLINE -->
+    <div class="page" id="page-discipline">
+      <div class="section-hero">
+        <div class="hero-icon">⚖️</div>
+        <h2>School Discipline Policy</h2>
+        <p>A four-level framework to manage behaviour consistently and fairly.</p>
+      </div>
+      <div class="level-card d">
+        <h3>Level 1 — D Degree (Minor)</h3>
+        <p><strong>Includes:</strong> Absenteeism, tardiness, inappropriate haircut/dress, graffiti, chewing doma, eve-teasing, verbal harassment, indecent language.</p>
+        <p style="margin-top:6px;"><strong>Action:</strong> Mentor-mentee conference, undertaking letter, inform parents, record on file.</p>
+      </div>
+      <div class="level-card c">
+        <h3>Level 2 — C Degree (Moderate)</h3>
+        <p><strong>Includes:</strong> Repeating Level 1 offences, bunking class/school, gambling, mobile phone confiscation, exam cheating, hooliganism, match-making.</p>
+        <p style="margin-top:6px;"><strong>Action:</strong> 5-day in-campus detention, fine Nu. 1,000 (mobile), 10% exam mark deduction, inform parents.</p>
+      </div>
+      <div class="level-card b">
+        <h3>Level 3 — B Degree (Serious)</h3>
+        <p><strong>Includes:</strong> Repeating Level 2, gang formation, illicit relationships, theft, drinking, trespassing, physical assault without weapons.</p>
+        <p style="margin-top:6px;"><strong>Action:</strong> 10-day in-campus detention, call parents, counsellor referral, undertaking letter.</p>
+      </div>
+      <div class="level-card a">
+        <h3>Level 4 — A Degree (Expulsion Risk)</h3>
+        <p><strong>Includes:</strong> Repeating Level 3, weapon-use altercations, resisting school authority, bullying with weapons, sexual misconduct, vandalism, drug supply/use.</p>
+        <p style="margin-top:6px;"><strong>Action:</strong> Immediate parent notification, school relocation in consultation with Dzongkhag, TC issuance if no school accepts.</p>
+      </div>
+      <h2 class="section-h">📱 Mobile Phone Policy</h2>
+      <ul class="rule-list">
+        <li class="rule-item"><span class="rule-num">1</span>Submit phones to warden/matron on day of arrival.</li>
+        <li class="rule-item"><span class="rule-num">2</span>Mentors may allow use at least once a month for educational purposes.</li>
+        <li class="rule-item"><span class="rule-num">5</span>Found in possession without submitting: <strong>Nu. 1,000 fine</strong>; confiscated until end of term.</li>
+        <li class="rule-item"><span class="rule-num">7</span>Repeat offence: <strong>Nu. 1,500 fine</strong>; phone returned only at end of year. Non-payment cancels TC and Progress Report.</li>
+      </ul>
+    </div>
+
+    <!-- HEALTH -->
+    <div class="page" id="page-health">
+      <div class="section-hero">
+        <div class="hero-icon">🏥</div>
+        <h2>Student Health & PHC Protocol</h2>
+        <p>Clear procedures to ensure every student receives timely, appropriate care.</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <h3>3.1 Minor Health Concerns</h3>
+          <p>Headaches, stomach pain, minor wounds — first aid provided on campus by the School Health In-charge.</p>
+        </div>
+        <div class="card">
+          <h3>3.2 Scheduled PHC Visits</h3>
+          <p>Moderate medical attention: referred to PHC on <strong>Thursdays after lunch</strong>, escorted by the school caregiver.</p>
+        </div>
+        <div class="card gold">
+          <h3>3.3 Emergency Cases</h3>
+          <p>Serious illness: student immediately escorted to PHC by Warden/Matron with the school driver.</p>
+        </div>
+        <div class="card gold">
+          <h3>3.5 Bed Rest</h3>
+          <p>Permitted only upon recommendation from a health professional (HA/Sister).</p>
+        </div>
+        <div class="card">
+          <h3>3.6 & 3.7 PHC Cards</h3>
+          <p>Cards collected during morning interval from respective health in-charges. Must be returned after the PHC visit.</p>
+        </div>
+        <div class="card">
+          <h3>3.9 CID Requirement</h3>
+          <p>Students must bring their CID number when visiting the PHC to enter in the system.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAFF -->
+    <div class="page" id="page-staff">
+      <div class="section-hero">
+        <div class="hero-icon">👩‍🏫</div>
+        <h2>Teaching Staff 2026</h2>
+        <p>Principal: <strong>Samten Wangchuk</strong> · Tel: 17441310</p>
+      </div>
+      <div class="staff-grid" id="staff-grid"></div>
+    </div>
+
+    <!-- CAPTAINS -->
+    <div class="page" id="page-captains">
+      <div class="section-hero">
+        <div class="hero-icon">🏅</div>
+        <h2>Office Bearers 2026</h2>
+        <p>Student leaders elected to serve and represent the school community.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Role</th><th>Name(s)</th><th>Class</th></tr></thead>
+          <tbody>
+            <tr><td>School Captain</td><td>Chencho Dorji / Tandin Zam</td><td>XII COM / XII SCI</td></tr>
+            <tr><td>Takin Troop</td><td>Sherab Dorji / Karma Dechen</td><td>XII COM</td></tr>
+            <tr><td>Tiger Troop</td><td>Damber Singh / Kencho Bidha</td><td>XII SCI / XII COM</td></tr>
+            <tr><td>Raven Troop</td><td>Tandin Dorji / Choki</td><td>XII SCI / XII COM</td></tr>
+            <tr><td>Red Panda</td><td>Ugyen Jamyang Drakpa / Tshering Lham</td><td>XII SCI</td></tr>
+            <tr><td>Scout Leader</td><td>Kinzang Thinley Wangchuk / Rinchen Lham</td><td>XI SCI / XII SCI</td></tr>
+            <tr><td>Mess Captain</td><td>Narath Ghalley / Dechen Zangmo</td><td>XII COM</td></tr>
+            <tr><td>Day Scholar Captain</td><td>Kinga Tshering / Tenzin Wangmo</td><td>XII COM / XII SCI</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- CALENDAR -->
+    <div class="page" id="page-calendar">
+      <div class="section-hero">
+        <div class="hero-icon">📅</div>
+        <h2>School Calendar 2026</h2>
+        <p>Key dates and events throughout the academic year.</p>
+      </div>
+      <div id="calendar-content"></div>
+    </div>
+
+    <!-- EXAMS -->
+    <div class="page" id="page-exams">
+      <div class="section-hero">
+        <div class="hero-icon">📝</div>
+        <h2>CA & Term Examination Weightage</h2>
+        <p>Marks distribution across continuous assessment and term exams.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Stage</th><th>Class Level</th><th>CA (Term I)</th><th>ME (Term I)</th><th>CA (Term II)</th><th>AE (Term II)</th><th>Total</th></tr></thead>
+          <tbody>
+            <tr><td>II</td><td>IV–VI</td><td>25</td><td>25</td><td>25</td><td>25</td><td>100</td></tr>
+            <tr><td>III</td><td>VII–VIII (ENG)</td><td>20</td><td>30</td><td>20</td><td>30</td><td>100</td></tr>
+            <tr><td>IV</td><td>IX–X (ENG-I)</td><td>15</td><td>35</td><td>15</td><td>35</td><td>100</td></tr>
+            <tr><td>V</td><td>XI–XII (ENG-I)</td><td>10</td><td>40</td><td>10</td><td>40</td><td>100</td></tr>
+            <tr><td>V</td><td>XI–XII (M.STUDIES)</td><td>20</td><td>30</td><td>20</td><td>30</td><td>100</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h2 class="section-h">📌 Key Exam Dates 2026</h2>
+      <div class="card-grid">
+        <div class="card"><h3>Spring Test</h3><p>April 13 onwards</p></div>
+        <div class="card"><h3>Mid-Term Exam</h3><p>June 15 onwards</p></div>
+        <div class="card"><h3>Autumn Test</h3><p>September 14 onwards</p></div>
+        <div class="card"><h3>Trial Exam</h3><p>October 12 onwards</p></div>
+        <div class="card"><h3>Annual Exam</h3><p>November 13 onwards</p></div>
+        <div class="card"><h3>Results</h3><p>December 18 (Online EMIS)</p></div>
+      </div>
+    </div>
+
+    <!-- AWARDS -->
+    <div class="page" id="page-awards">
+      <div class="section-hero">
+        <div class="hero-icon">🏆</div>
+        <h2>Awards & Recognition</h2>
+        <p>Celebrating excellence across academics, leadership and character.</p>
+      </div>
+      <div class="card-grid">
+        <div class="card gold">
+          <h3>🌟 Best Student of the Year</h3>
+          <p>For graduating Class XII students. Criteria: academic excellence (above 65%), school representation, leadership, extracurricular participation, character & integrity, attendance.</p>
+        </div>
+        <div class="card gold">
+          <h3>🏅 Best Captain Award</h3>
+          <p>For any student leader. Criteria: academics (must pass term exam), exceptional leadership, significant contribution, extracurricular participation, integrity and punctuality.</p>
+        </div>
+        <div class="card">
+          <h3>📜 Academic Awards</h3>
+          <p>Certificates for class toppers (Mid-Term), level toppers (Trial/Annual), and students scoring 90%+ in written exams for both terms.</p>
+        </div>
+        <div class="card">
+          <h3>🎖 Student Leadership Certificate</h3>
+          <p>Awarded to all captains who meet the leadership, contribution and conduct criteria throughout the academic year.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+<script>
+// Populate staff
+const staffData = [
+  ["Samten Wangchuk","Principal","17441310"],
+  ["Dorji Phub","Teacher","17545461"],
+  ["Kinley Peldon","Teacher","17940809"],
+  ["Dorji Dendup","Teacher","17565492"],
+  ["Tshewang Namgyel","Teacher","17879084"],
+  ["Wangchuk Namgay","Teacher","17473649"],
+  ["Choki Wangmo","Teacher","77768053"],
+  ["Karma Tshomo","Teacher","17775893"],
+  ["Phuentsho Choden","Teacher","17421563"],
+  ["Sangda Pem","Teacher","17817496"],
+  ["Lhaki Choezang","Teacher","17756088"],
+  ["Jigme Dorji","Teacher","17682945"],
+  ["Palden Dema","Teacher","17887856"],
+  ["Droley Namgay","Teacher","17690285"],
+  ["Namgay Pelden","Teacher","17651919"],
+  ["Sonam Zangpo","Teacher","17872935"],
+  ["Sonam Wangchuk","Teacher","77461619"],
+  ["Tandin Tshewang","Teacher","17935295"],
+  ["Tshering Pem","Teacher","77289554"],
+  ["Tshering Pemo","Teacher","17909674"],
+  ["Sangay Khandu","Teacher","17474241"],
+  ["Baljit Singh","Teacher","17215684"],
+  ["Mani Gyeltshen","Teacher","17330783"],
+  ["Sangay Om","Counsellor","17631766"],
+  ["Tshewang Choden","Teacher","17919540"],
+  ["Ugyen Zangmo","Teacher","17587393"],
+  ["Rada Tenzin","Teacher","17690850"],
+  ["Sita Chhetri","Teacher","17429412"],
+  ["Karma Lhamo","Teacher","17477257"],
+];
+
+const grid = document.getElementById('staff-grid');
+staffData.forEach(([name,role,phone]) => {
+  const initials = name.split(' ').map(w=>w[0]).slice(0,2).join('');
+  grid.innerHTML += `
+    <div class="staff-card">
+      <div class="staff-avatar">${initials}</div>
+      <h4>${name}</h4>
+      <p>${role}</p>
+      <p class="phone">📞 ${phone}</p>
+    </div>`;
+});
+
+// Calendar
+const calEvents = {
+  "February": [
+    ["Feb 10","Teachers and staff report to school"],
+    ["Feb 15","Boarder students (IV–XII) report"],
+    ["Feb 16","School reopens"],
+    ["Feb 21–23","Birth Anniversary of His Majesty the King"],
+  ],
+  "March": [
+    ["Mar 2","Classes PP–III boarders report"],
+    ["Mar 8","International Women's Day"],
+    ["Mar 14–15","School Rimdro"],
+    ["Mar 21","Welcome Show"],
+  ],
+  "April": [
+    ["Apr 7","World Health Day"],
+    ["Apr 13","Spring Test Begins"],
+  ],
+  "May": [
+    ["May 2","Birth Anniversary of Third Druk Gyalpo / Teachers Day"],
+    ["May 12","Kids Athletics Festival"],
+    ["May 31","Lord Buddha's Parinirvana"],
+  ],
+  "June": [
+    ["Jun 2","Coronation of Fourth Druk Gyalpo"],
+    ["Jun 5","World Environment Day"],
+    ["Jun 15","Mid-Term Examination Begins"],
+    ["Jun 24","Birth Anniversary of Guru Rinpoche"],
+  ],
+  "July": [
+    ["Jul 15","Teachers & Boarders return from summer vacation"],
+    ["Jul 18","First Sermon of Lord Buddha"],
+    ["Jul 25","Cross Country Race & Result Declaration / PTM"],
+  ],
+  "August": [
+    ["Aug 1","World Scout's Scarf Day"],
+    ["Aug 18","Short Drama Competition (English, Classes 4–6)"],
+  ],
+  "September": [
+    ["Sep 1–5","Reading Week (Whole School)"],
+    ["Sep 10","World Suicide Prevention Day"],
+    ["Sep 12","School Annual Concert"],
+    ["Sep 14","Autumn Test Begins"],
+    ["Sep 23","Blessed Rainy Day"],
+  ],
+  "October": [
+    ["Oct 10","World Mental Health Day"],
+    ["Oct 12","Trial Exam Begins"],
+    ["Oct 16","World Food Day"],
+    ["Oct 21","Dashain"],
+    ["Oct 27","Trial Examination Ends"],
+  ],
+  "November": [
+    ["Nov 1","Coronation Day / Annual School Marathon"],
+    ["Nov 9","Practical Exam Begins"],
+    ["Nov 11","Birth Anniversary of Fourth Druk Gyalpo / Children's Day / Award Day"],
+    ["Nov 13","Annual Exam Begins"],
+    ["Nov 26","Annual Exam Ends"],
+  ],
+  "December": [
+    ["Dec 9","Promotion meeting for home exam"],
+    ["Dec 17","National Day"],
+    ["Dec 18","Home exam result declaration"],
+    ["Dec 19","Winter Vacation begins"],
+  ],
+};
+
+const calContent = document.getElementById('calendar-content');
+const monthColors = ['red','gold','red','gold','red','gold','red','gold','red','gold','red','gold'];
+let mi = 0;
+for (const [month, events] of Object.entries(calEvents)) {
+  calContent.innerHTML += `<h2 class="section-h">📅 ${month}</h2>`;
+  events.forEach(([date, act]) => {
+    const cls = mi % 2 === 0 ? '' : 'gold-bg';
+    calContent.innerHTML += `
+      <div class="cal-item">
+        <span class="cal-date ${cls}">${date}</span>
+        <span>${act}</span>
+      </div>`;
+  });
+  mi++;
+}
+
+// Navigation
+const pages = {};
+document.querySelectorAll('.page').forEach(p => pages[p.id.replace('page-','')] = p);
+
+function goTo(id, navEl) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const page = document.getElementById('page-' + id);
+  if (page) {
+    page.classList.add('active');
+    document.getElementById('content').scrollTop = 0;
+  }
+  if (navEl) navEl.classList.add('active');
+  const titles = {
+    cover:'Cover & Welcome', history:'School History', schedule:'Schedule & Timing',
+    fees:'Fee Structure', curriculum:'Curriculum Programs', programs:'Special Programs',
+    conduct:'Code of Conduct', discipline:'Discipline Policy', health:'Health Protocol',
+    staff:'Teaching Staff', captains:'Office Bearers', calendar:'School Calendar',
+    exams:'Exam Weightage', awards:'Awards & Criteria'
+  };
+  document.getElementById('chapter-title').textContent = titles[id] || id;
+  updateProgress(id);
+  if (window.innerWidth <= 700) document.getElementById('sidebar').classList.remove('open');
+}
+
+// Progress bar
+const pageOrder = ['cover','history','schedule','fees','curriculum','programs','conduct','discipline','health','staff','captains','calendar','exams','awards'];
+function updateProgress(id) {
+  const idx = pageOrder.indexOf(id);
+  const pct = ((idx + 1) / pageOrder.length) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+}
+
+// Simple search
+function handleSearch(q) {
+  if (!q.trim()) return;
+  q = q.toLowerCase();
+  const map = {
+    'fee':'fees', 'fees':'fees', 'cost':'fees', 'nu':'fees',
+    'schedule':'schedule', 'time':'schedule', 'timing':'schedule',
+    'conduct':'conduct', 'rules':'conduct', 'rule':'conduct',
+    'discipline':'discipline', 'mobile':'discipline', 'phone':'discipline',
+    'staff':'staff', 'teacher':'staff', 'teachers':'staff',
+    'calendar':'calendar', 'dates':'calendar', 'event':'calendar',
+    'exam':'exams', 'test':'exams', 'marks':'exams',
+    'award':'awards', 'captain':'captains', 'leader':'captains',
+    'health':'health', 'sick':'health', 'phc':'health',
+    'program':'programs', 'scout':'programs', 'mentor':'programs', 'dear':'programs',
+    'curriculum':'curriculum', 'subject':'curriculum',
+    'history':'history', '1997':'history',
+  };
+  for (const [k, v] of Object.entries(map)) {
+    if (q.includes(k)) {
+      const navEl = document.querySelector(`.nav-item[onclick*="${v}"]`);
+      goTo(v, navEl);
+      document.getElementById('search-input').value = '';
+      return;
+    }
+  }
+}
+
+updateProgress('cover');
+</script>
+</body>
+</html>
